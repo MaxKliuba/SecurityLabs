@@ -5,6 +5,10 @@ public class Task2 {
 
         System.out.println("[KEY LENGTH]: " + Vigenere.analyzeKeyLength(in));
 
-        System.out.println(Vigenere.decodeXor(in, new String(new char[]{'*', '*', '*', '*'})));
+//        System.out.println(Vigenere.decodeXor(in, new String(new char[]{'*', '*', '*', '*'})));
+
+        for (int i = 0; i < in.length(); i+=4) {
+            System.out.print(in.charAt(i));
+        }
     }
 }
