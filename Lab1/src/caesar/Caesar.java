@@ -1,3 +1,5 @@
+package caesar;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,11 +22,11 @@ public class Caesar {
             resultList.add(decodeXor(in, key));
         }
 
-        int index = 0;
+        int index = 1;
         float maxCount = 0;
 
-        for (int i = 0; i < resultList.size(); i++) {
-            float p = getAsciiPercent(resultList.get(i));
+        for (int i = 1; i < resultList.size(); i++) {
+            float p = getTextPercent(resultList.get(i));
 
             System.out.println("[KEY " + i + " - " + p + "%]: " + resultList.get(i));
             if (p > maxCount) {
@@ -33,15 +35,15 @@ public class Caesar {
             }
         }
 
-        return "[KEY " + index + "]: " + resultList.get(index);
+        return resultList.get(index);
     }
 
-    private static float getAsciiPercent(String str) {
+    private static float getTextPercent(String str) {
         float n = 0;
 
         for (int i = 0; i < str.length(); i++) {
             char ch = str.charAt(i);
-            if (ch >= 27 && ch <= 128) {
+            if ((ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || ch == '.' || ch == ',' || ch == ' ') {
                 n++;
             }
         }

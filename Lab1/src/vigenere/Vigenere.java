@@ -1,3 +1,5 @@
+package vigenere;
+
 import java.util.*;
 
 public class Vigenere {
@@ -64,5 +66,33 @@ public class Vigenere {
         }
 
         return out.toString();
+    }
+
+    public static String[] divideIntoBlocks(String in, int keyLength) {
+        String[] blocks = new String[keyLength];
+
+        for (int i = 0; i < in.length(); i += keyLength) {
+            for (int j = 0; j < keyLength; j++) {
+                if (blocks[j] == null) {
+                    blocks[j] = "";
+                }
+
+                blocks[j] += in.charAt((i + j) % in.length());
+            }
+        }
+
+        return blocks;
+    }
+
+    public static String margeBlocks(String[] blocks, int keyLength) {
+        StringBuilder str = new StringBuilder();
+
+        for (int i = 0; i < blocks[0].length(); i++) {
+            for (int j = 0; j < blocks.length; j++) {
+                str.append(blocks[j].charAt(i % blocks[j].length()));
+            }
+        }
+
+        return str.toString();
     }
 }
