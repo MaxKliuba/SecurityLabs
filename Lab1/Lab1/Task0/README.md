@@ -1,7 +1,7 @@
-### INPUT
+## INPUT
 https://docs.google.com/document/d/1sFILqAwKEdKsTTPsVQNjmZBdzdRJd5DKdNZVjFTCxlo/edit
 
-### OUTPUT
+## OUTPUT
 Well, and now you see that it’s absolutely pointless to try to invent your own “crypto” with expectations that if someone doesn’t know the algorithm (even binary base64, which is pretty stupid) it’s impossible for him to decipher. You’re reading this now in plain text so that argument clearly falls short.
 
 Now to the actual tasks. All of them are graded based on the code you write, so no point in stealing deciphered text from your classmates.
