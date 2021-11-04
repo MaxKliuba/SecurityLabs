@@ -47,7 +47,7 @@ public class Task1 {
         }
     }
 
-    public static int next(int last, int a, int c, long m) {
+    public static int next(long last, int a, int c, long m) {
         return (int) ((a * last + c) % m);
     }
 

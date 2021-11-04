@@ -10,7 +10,7 @@ public class Result {
     private Account account;
 
     @SerializedName("realNumber")
-    private int realNumber;
+    private long realNumber;
 
     public String getMessage() {
         return message;
@@ -28,11 +28,11 @@ public class Result {
         this.account = account;
     }
 
-    public int getRealNumber() {
+    public long getRealNumber() {
         return realNumber;
     }
 
-    public void setRealNumber(int realNumber) {
+    public void setRealNumber(long realNumber) {
         this.realNumber = realNumber;
     }
 
