@@ -1,7 +1,6 @@
 ﻿using Lab3.Model;
 using Lab3.Utils;
 using System;
-using System.Numerics;
 
 namespace Lab3
 {
@@ -14,16 +13,22 @@ namespace Lab3
 
             Result result = null;
             long[] states = new long[3];
-            for (int i = 0; i < states.Length; i++)
+            long m = (long)Math.Pow(2, 32);
+            long modInv;
+
+            do
             {
-                result = CasinoRoyale.PlayLcg(account.Id, 1, 1);
-                account = result.Account;
-                states[i] = result.RealNumber;
-            }
+                for (int i = 0; i < states.Length; i++)
+                {
+                    result = CasinoRoyale.PlayLcg(account.Id, 1, 1);
+                    account = result.Account;
+                    states[i] = result.RealNumber;
+                }
+            } while (!TryModInverse(states[1] - states[0], m, out modInv));
+
             Console.WriteLine($"[{string.Join(", ", states)}]");
 
-            long m = (long)Math.Pow(2, 32);
-            int a = CrackUnknownMultiplier(states, m);
+            int a = CrackUnknownMultiplier(states, m, modInv);
             int c = CrackUnknownIncrement(states, m, a);
             Console.WriteLine("a = " + a);
             Console.WriteLine("c = " + c);
@@ -51,37 +56,47 @@ namespace Lab3
             return (int)((states[1] - states[0] * multiplier) % modulus);
         }
 
-        private static int CrackUnknownMultiplier(long[] states, long modulus)
+        private static int CrackUnknownMultiplier(long[] states, long modulus, long modInv)
         {
-            return (int)((states[2] - states[1]) * ModInverse(states[1] - states[0], modulus) % modulus);
+            return (int)((states[2] - states[1]) * modInv % modulus);
         }
 
-        private static long ModInverse(long b, long n)
+        public static bool TryModInverse(long number, long modulo, out long result)
         {
-            (long g, long x, long _) = Egcd(b, n);
-
-            return x % n;
-
-            if (g == 1)
+            if (number < 1 || modulo < 2)
             {
-                return x % n;
+                result = default;
+
+                return false;
             }
 
-            throw new ArgumentException("Invalid arguments");
-        }
+            long n = number;
+            long m = modulo, v = 0, d = 1;
 
-        private static (long, long, long) Egcd(long a, long b)
-        {
-            if (a == 0)
+            while (n > 0)
             {
-                return (b, 0, 1);
+                long t = m / n, x = n;
+                n = m % x;
+                m = x;
+                x = d;
+                d = checked(v - t * x);
+                v = x;
             }
-            else
-            {
-                (long g, long x, long y) = Egcd(b % a, a);
+            result = v % modulo;
 
-                return (g, y - (b / a) * x, x);
+            if (result < 0)
+            {
+                result += modulo;
             }
+
+            if (number * result % modulo == 1L)
+            {
+                return true;
+            }
+
+            result = default;
+
+            return false;
         }
     }
 }

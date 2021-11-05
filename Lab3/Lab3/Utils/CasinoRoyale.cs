@@ -39,7 +39,7 @@ namespace Lab3.Utils
             return Play("Mt", id, bed, number);
         }
 
-        public static Result PlayBetterMt(int id, long bed, int number)
+        public static Result PlayBetterMt(int id, long bed, uint number)
         {
             return Play("BetterMt", id, bed, number);
         }

@@ -14,6 +14,7 @@ namespace Lab3
 
             Task1.Run(account);
             Task2.Run(account);
+            Task3.Run(account);
         }
     }
 }

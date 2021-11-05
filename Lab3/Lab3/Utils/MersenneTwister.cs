@@ -17,20 +17,26 @@ namespace Lab3.Utils
         private const uint c = 0xEFC60000;
         private const int l = 18;
         private const int f = 1812433253;
-
-        private uint[] mt = new uint[624];
-        private int index = n + 1;
         private const long lowerMask = (1 << r) - 1L;
         private const long upperMask = ~lowerMask;
+        private int index = n + 1;
+
+        public uint[] States { get; set; }
+
+        public MersenneTwister() : this((uint)new Random().Next(0))
+        {
+
+        }
 
         public MersenneTwister(uint seed)
         {
+            States = new uint[n];
+            States[0] = seed;
             index = n;
-            mt[0] = seed;
 
             for (int i = 1; i < n; i++)
             {
-                mt[i] = (uint)(f * (mt[i - 1] ^ (mt[i - 1] >> (w - 2))) + i);
+                States[i] = (uint)(f * (States[i - 1] ^ (States[i - 1] >> (w - 2))) + i);
             }
         }
 
@@ -38,14 +44,14 @@ namespace Lab3.Utils
         {
             for (int i = 0; i < n; i++)
             {
-                uint temp = (uint)((mt[i] & upperMask) + (mt[(i + 1) % n] & lowerMask));
+                uint temp = (uint)((States[i] & upperMask) + (States[(i + 1) % n] & lowerMask));
                 uint tempShift = temp >> 1;
 
                 if (temp % 2 != 0)
                 {
                     tempShift = tempShift ^ a;
                 }
-                mt[i] = mt[(i + m) % n] ^ tempShift;
+                States[i] = States[(i + m) % n] ^ tempShift;
             }
             index = 0;
         }
@@ -73,7 +79,7 @@ namespace Lab3.Utils
                 Twist();
             }
 
-            uint output = Temper(mt[index]);
+            uint output = Temper(States[index]);
             index++;
 
             return output;
