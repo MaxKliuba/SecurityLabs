@@ -8,7 +8,16 @@ namespace Lab1
     {
         public static void Run(string input)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine();
+            Console.WriteLine("*************** [TASK 3] ***************");
+            Console.ResetColor();
 
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("****************************************");
+            Console.WriteLine();
+            Console.ResetColor();
         }
     }
 }

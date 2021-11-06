@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Lab1
 {
-    class Vigenere
+    class VigenereCracker
     {
         public static void AnalyzeKeyLength(string input)
         {
@@ -14,14 +14,35 @@ namespace Lab1
 
                 for (int j = 0; j < input.Length; j++)
                 {
-                    if (input[j] == input[(j + i) % input.Length])
+                    if (i != 0 && input[j] == input[(j + i) % input.Length])
                     {
                         indexOfCoincidence[i]++;
                     }
                 }
-
-                Console.WriteLine($"[Offset {i}] -> {indexOfCoincidence[i]}");
             }
+
+            DrawGraph(indexOfCoincidence);
+        }
+
+        public static void DrawGraph(int[] array)
+        {
+            int minVal = array[0];
+            int maxVal = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                minVal = Math.Min(minVal, array[i]);
+                maxVal = Math.Max(maxVal, array[i]);
+            }
+
+            for (int i = 0; i < array.Length; i++)
+            {
+                Console.WriteLine($"[{i}]\t| {array[i]}\t| {new string('█', Map(array[i], minVal, maxVal, 1, 30))}");
+            }
+        }
+
+        private static int Map(int x, int inMin, int inMax, int outMin, int outMax)
+        {
+            return (x - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
         }
 
         public static string DecodeXor(string input, string key)
@@ -44,13 +65,15 @@ namespace Lab1
 
             for (int i = 0; i < blocksIn.Length; i++)
             {
-                Result result = Caesar.DecodeXorBruteforce(blocksIn[i]);
+                Result result = CaesarCracker.DecodeXorBruteforce(blocksIn[i]);
                 blockOut[i] = result.Value;
                 key += result.Key;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.WriteLine(result);
+                Console.ResetColor();
             }
 
-            return new Result(key, Vigenere.MargeBlocks(blockOut));
+            return new Result(key, VigenereCracker.MargeBlocks(blockOut));
         }
 
         public static string[] DivideIntoBlocks(string input, int keyLength)

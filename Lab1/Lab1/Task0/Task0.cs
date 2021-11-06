@@ -7,11 +7,21 @@ namespace Lab1
     {
         public static void Run(string input)
         {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine();
+            Console.WriteLine("*************** [TASK 0] ***************");
+            Console.ResetColor();
+
             string inputBinDecoded = FromBinString(input);
             //Console.WriteLine(inputBinDecoded);
 
             string inputBase64Decoded = Encoding.UTF8.GetString(Convert.FromBase64String(inputBinDecoded));
             Console.WriteLine(inputBase64Decoded);
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("****************************************");
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
         private static string FromBinString(string binString)

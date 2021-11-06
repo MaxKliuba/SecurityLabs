@@ -7,9 +7,20 @@ namespace Lab1
     {
         public static void Run(string input)
         {
-            string inputText = FromHexString(input);
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine();
+            Console.WriteLine("*************** [TASK 1] ***************");
+            Console.ResetColor();
 
-            Console.WriteLine($"[RESULT]: {Caesar.DecodeXorBruteforce(inputText)}");
+            string inputText = FromHexString(input);
+            Result result = CaesarCracker.DecodeXorBruteforce(inputText);
+
+            Console.WriteLine();
+            Console.WriteLine("[RESULT]:");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(result);
+            Console.ResetColor();
+            Console.WriteLine();
             //Console.WriteLine(Caesar.DecodeXor(inputText, 55));
 
             /*
@@ -17,6 +28,11 @@ namespace Lab1
              * then xor ??e?? with ??e??, then ??l?? with ??y??, and then xor next char ??l?? with ??k?? again, then ??o?? with ??e?? and so on. 
              * You may use an index of coincidence, Hamming distance, Kasiski examination, statistical tests or whatever method you feel would show the best result/
              */
+
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine("****************************************");
+            Console.WriteLine();
+            Console.ResetColor();
         }
 
         private static string FromHexString(string hexString)

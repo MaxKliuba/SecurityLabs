@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Lab1
 {
-    class Caesar
+    class CaesarCracker
     {
         public static string DecodeXor(string input, int key)
         {
@@ -34,7 +34,7 @@ namespace Lab1
             {
                 float p = GetTextPercent(results[i].Value);
 
-                Console.WriteLine($"[{p}%] -> {results[i]}");
+                Console.WriteLine($"[{p}%]\t-> {results[i]}");
                 if (p > maxCount)
                 {
                     maxCount = p;
