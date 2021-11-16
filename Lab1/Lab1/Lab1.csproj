@@ -5,4 +5,9 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AForge.Genetic" Version="2.2.5" />
+    <PackageReference Include="GeneticSharp" Version="2.6.0" />
+  </ItemGroup>
+
 </Project>
