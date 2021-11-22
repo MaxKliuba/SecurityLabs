@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "9wzdcBvoblHRA1lW6RN5IJq3vLACk07GYoRpXeX6WuRE2NNr0Y6AReCf63/jCkzLyIco748M3KSdyGvPteoI/Q==",
+  "success": true,
+  "projectFilePath": "D:\\KPI\\Security\\Git\\Lab4\\Lab4\\Lab4.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\klyub\\.nuget\\packages\\bcrypt.net-next\\4.0.2\\bcrypt.net-next.4.0.2.nupkg.sha512"
+  ],
+  "logs": []
+}
