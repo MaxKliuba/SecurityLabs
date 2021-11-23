@@ -6,15 +6,28 @@
 
         public string Salt { get; set; }
 
-        public Hash(string hashPassword, string salt)
+        public string Text { get; set; }
+
+        public Hash(string hashTaxt, string salt, string text)
         {
-            HashText = hashPassword;
+            HashText = hashTaxt;
             Salt = salt;
+            Text = text;
+        }
+
+        public string PrivateWrite()
+        {
+            return $"{HashText};{Salt}";
+        }
+
+        public string PublicWrite()
+        {
+            return $"{HashText};{Salt};{Text}";
         }
 
         public override string ToString()
         {
-            return $"{HashText};{Salt}";
+            return $"{HashText}\t{Salt}\t{Text}";
         }
     }
 }

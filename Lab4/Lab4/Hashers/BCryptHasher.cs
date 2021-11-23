@@ -18,12 +18,12 @@ namespace Lab4
         {
             string hashedText = Utils.FromStringToHex(BCryptNet.HashPassword(text, salt));
 
-            return new Hash(hashedText, salt);
+            return new Hash(hashedText, Utils.FromStringToHex(salt), text);
         }
 
         public static bool Verify(string text, string hash, string salt)
         {
-            return CreateHash(text, salt).HashText.Equals(hash);
+            return CreateHash(text, Utils.FromHexToString(salt)).HashText.Equals(hash);
         }
     }
 }

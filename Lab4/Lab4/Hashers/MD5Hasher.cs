@@ -9,7 +9,7 @@ namespace Lab4
     {
         public static string CreateSalt()
         {
-            return Utils.FromStringToHex(BCryptNet.GenerateSalt());
+            return BCryptNet.GenerateSalt();
         }
 
         public static Hash CreateHash(string text)
@@ -23,12 +23,12 @@ namespace Lab4
             byte[] hash = MD5.Create().ComputeHash(bytes);
             string hashedText = Utils.FromStringToHex(Convert.ToBase64String(hash));
 
-            return new Hash(hashedText, salt);
+            return new Hash(hashedText, Utils.FromStringToHex(salt), text);
         }
 
         public static bool Verify(string text, string hash, string salt)
         {
-            return CreateHash(text, salt).HashText.Equals(hash);
+            return CreateHash(text, Utils.FromHexToString(salt)).HashText.Equals(hash);
         }
     }
 }
