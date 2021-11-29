@@ -1,4 +1,4 @@
-## [Stack One](http://exploit.education/protostar/stack-two/)
+## [Stack Two](http://exploit.education/protostar/stack-two/)
 
 На даному рівні розглядаються змінні середовища та те, як їх можна встановити.
 
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
 Для перевірки можна використати наступну команду:  
 ```env | grep GREENIE```
 
-У тому числі змінну оточення можна задати використовуючи код python:
+У тому числі змінну оточення можна задати використовуючи код python:  
 ```export GREENIE=$(python -c "print('python_test_env')")```
 
 Стосовно другої проблеми, то можна просто використовувати формат '\x0d', який є у python.
