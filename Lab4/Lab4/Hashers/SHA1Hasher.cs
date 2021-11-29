@@ -1,5 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
 using System.Text;
 using BCryptNet = BCrypt.Net.BCrypt;
 
@@ -19,10 +18,9 @@ namespace Lab4
 
         public static Hash CreateHash(string text, string salt)
         {
-            byte[] bytes = Encoding.UTF8.GetBytes(salt + text);
-            SHA256Managed sHA256ManagedString = new SHA256Managed();
-            byte[] hash = sHA256ManagedString.ComputeHash(bytes);
-            string hashedText = Utils.FromStringToHex(Convert.ToBase64String(hash));
+            byte[] bytes = Encoding.UTF8.GetBytes(text + salt);
+            byte[] hash = new SHA1Managed().ComputeHash(bytes);
+            string hashedText = Utils.ByteArrayToHexString(hash);
 
             return new Hash(hashedText, Utils.FromStringToHex(salt), text);
         }

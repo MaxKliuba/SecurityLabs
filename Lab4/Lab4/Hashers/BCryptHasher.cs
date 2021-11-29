@@ -21,9 +21,9 @@ namespace Lab4
             return new Hash(hashedText, Utils.FromStringToHex(salt), text);
         }
 
-        public static bool Verify(string text, string hash, string salt)
+        public static bool Verify(string text, string hash)
         {
-            return CreateHash(text, Utils.FromHexToString(salt)).HashText.Equals(hash);
+            return BCryptNet.Verify(text, Utils.FromHexToString(hash));
         }
     }
 }
