@@ -15,14 +15,14 @@
             Text = text;
         }
 
-        public string PrivateWrite()
+        public string PrivateWrite(char separator = ';')
         {
-            return $"{HashText};{Salt}";
+            return $"{HashText}{separator}{Salt}";
         }
 
-        public string PublicWrite()
+        public string PublicWrite(char separator = ';')
         {
-            return $"{HashText};{Salt};{Text}";
+            return $"{HashText}{separator}{Salt}{separator}{Text}";
         }
 
         public override string ToString()

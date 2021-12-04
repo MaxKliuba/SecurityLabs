@@ -13,8 +13,8 @@ namespace Lab4
             "zxcvbnm",
             "abcdefghijklmnopqrstuvwxyz",
         };
-        private static readonly List<string> NAMES = DocumentReader.ReadList("..\\..\\..\\res\\names.txt", false);
-        private static readonly List<string> NOUNS = DocumentReader.ReadList("..\\..\\..\\res\\nouns.txt", false);
+        private static readonly List<string> NAMES = DocumentManager.ReadList("..\\..\\..\\..\\resources\\names.txt", false);
+        private static readonly List<string> NOUNS = DocumentManager.ReadList("..\\..\\..\\..\\resources\\nouns.txt", false);
 
         private static readonly Random RANDOM = new Random();
 

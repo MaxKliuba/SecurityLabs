@@ -16,14 +16,14 @@ namespace Lab4
 
         public static Hash CreateHash(string text, string salt)
         {
-            string hashedText = Utils.FromStringToHex(BCryptNet.HashPassword(text, salt));
+            string hashedText = BCryptNet.HashPassword(text, salt);
 
-            return new Hash(hashedText, Utils.FromStringToHex(salt), text);
+            return new Hash(hashedText, salt, text);
         }
 
         public static bool Verify(string text, string hash)
         {
-            return BCryptNet.Verify(text, Utils.FromHexToString(hash));
+            return BCryptNet.Verify(text, hash);
         }
     }
 }

@@ -8,8 +8,8 @@ namespace Lab4
     {
         public static void Run()
         {
-            List<string> top100Passwords = DocumentReader.ReadList("..\\..\\..\\res\\top_100_passwords.txt");
-            List<string> top1MPasswords = DocumentReader.ReadList("..\\..\\..\\res\\top_1M_passwords.txt");
+            List<string> top100Passwords = DocumentManager.ReadList("..\\..\\..\\..\\resources\\top_100_passwords.txt");
+            List<string> top1MPasswords = DocumentManager.ReadList("..\\..\\..\\..\\resources\\top_1M_passwords.txt");
             Console.WriteLine($"Result (Top 100 & 1M) -> {ComparePasswordLists(top100Passwords, top1MPasswords)}%");
 
             int limit = 100_000;
@@ -28,8 +28,8 @@ namespace Lab4
             }
             Console.WriteLine("DONE");
 
-            //DocumentReader.WriteList("..\\..\\..\\out\\passwordsMd5.txt", passwords);
-            //DocumentReader.WriteList("..\\..\\..\\out\\passwordsSha1.txt", passwords);
+            //DocumentReader.WriteList("..\\..\\..\\..\\output\\passwordsMd5.txt", passwords);
+            //DocumentReader.WriteList("..\\..\\..\\..\\output\\passwordsSha1.txt", passwords);
 
             Console.WriteLine($"Result (MD5 passwords & Top 100) -> {ComparePasswordLists(passwordsMd5, top100Passwords)}%");
             //Console.WriteLine($"Result (MD5 passwords & Top 1M) -> {ComparePasswordLists(passwordsMd5, top1MPasswords)}%");
@@ -50,8 +50,8 @@ namespace Lab4
                 }
             }
             Console.WriteLine("DONE");
-            DocumentReader.WriteHashList("..\\..\\..\\out\\hashes_md5.csv", hashesMd5);
-            DocumentReader.WriteList("..\\..\\..\\out\\passwords_md5.txt", hashesMd5.Select(h => h.ToString()).ToList());
+            DocumentManager.WriteHashList("..\\..\\..\\..\\output\\hashes_md5.csv", hashesMd5);
+            DocumentManager.WriteList("..\\..\\..\\..\\output\\passwords_md5.txt", hashesMd5.Select(h => h.ToString()).ToList());
 
             Console.Write("SHA1 hashing");
             List<Hash> hashesSha1 = new List<Hash>();
@@ -66,8 +66,8 @@ namespace Lab4
                 }
             }
             Console.WriteLine("DONE");
-            DocumentReader.WriteHashList("..\\..\\..\\out\\hashes_sha1.csv", hashesSha1);
-            DocumentReader.WriteList("..\\..\\..\\out\\passwords_sha1.txt", hashesSha1.Select(h => h.ToString()).ToList());
+            DocumentManager.WriteHashList("..\\..\\..\\..\\output\\hashes_sha1.csv", hashesSha1);
+            DocumentManager.WriteList("..\\..\\..\\..\\output\\passwords_sha1.txt", hashesSha1.Select(h => h.ToString()).ToList());
         }
 
         public static double ComparePasswordLists(List<string> list, List<string> baseList)
